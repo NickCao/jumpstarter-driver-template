@@ -16,9 +16,9 @@ def test_example_power():
 
 
 def test_example_custom():
-    with serve(ExampleCustom(custom_parameter="something")) as custom:
+    with serve(ExampleCustom(configured_message="something")) as custom:
         custom.configure(1.0, "two", [3.0, 4.0])
-        assert custom.slow_task(0.2) == "slept for 0.2 seconds"
+        assert custom.slow_task(0.2) == "slept for 0.2 seconds, message: something"
         assert list(islice(custom.slow_generator(), 3)) == [0.0, 1.0, 2.0]
         custom.combined_action()
 

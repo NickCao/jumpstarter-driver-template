@@ -43,7 +43,7 @@ class ExampleCustom(Driver):
     """
 
     # config values would be automatically initialized from the exporter config
-    custom_parameter: str
+    configured_message: str
 
     # required classmethod returning the import path of corresponding client class
     @classmethod
@@ -62,7 +62,7 @@ class ExampleCustom(Driver):
     @export
     async def slow_task(self, seconds: float) -> str:
         await sleep(seconds)
-        return f"slept for {seconds} seconds"
+        return f"slept for {seconds} seconds, message: {self.configured_message}"
 
     # or async generators
     @export

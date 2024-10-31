@@ -8,6 +8,7 @@ authors = [
 ]
 requires-python = ">=3.12"
 dependencies = [
+    "anyio>=4.6.2.post1",
     "jumpstarter",
 ]
 
@@ -16,6 +17,10 @@ source = "vcs"
 
 [tool.uv.sources]
 jumpstarter = { git = "https://github.com/jumpstarter-dev/jumpstarter.git" }
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "INFO"
 
 [build-system]
 requires = ["hatchling", "hatch-vcs"]

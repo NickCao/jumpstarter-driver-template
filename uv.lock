@@ -417,6 +417,7 @@ name = "jumpstarter-driver-template"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "anyio" },
     { name = "jumpstarter" },
 ]
 
@@ -427,7 +428,10 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "jumpstarter", git = "https://github.com/jumpstarter-dev/jumpstarter.git" }]
+requires-dist = [
+    { name = "anyio", specifier = ">=4.6.2.post1" },
+    { name = "jumpstarter", git = "https://github.com/jumpstarter-dev/jumpstarter.git" },
+]
 
 [package.metadata.requires-dev]
 dev = [

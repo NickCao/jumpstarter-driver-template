@@ -19,6 +19,7 @@ source = "vcs"
 jumpstarter = { git = "https://github.com/jumpstarter-dev/jumpstarter.git" }
 
 [tool.pytest.ini_options]
+addopts = "--cov --cov-report=html --cov-report=xml"
 log_cli = true
 log_cli_level = "INFO"
 
@@ -28,6 +29,7 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
+    "pytest-cov>=6.0.0",
     "pytest>=8.3.3",
     "ruff>=0.7.1",
 ]

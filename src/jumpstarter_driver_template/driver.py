@@ -1,8 +1,10 @@
 from dataclasses import dataclass
+from anyio.streams.file import FileReadStream
 from itertools import count
 from anyio import sleep
+from contextlib import asynccontextmanager
 
-from jumpstarter.driver import Driver, export
+from jumpstarter.driver import Driver, export, exportstream
 from jumpstarter.drivers.power.driver import PowerInterface
 from jumpstarter.drivers.power.common import PowerReading
 from collections.abc import Generator, AsyncGenerator
@@ -68,3 +70,10 @@ class ExampleCustom(Driver):
         for i in count():
             await sleep(0.1)
             yield i
+
+    # special "stream" methods can return raw byte streams based on any io streams
+    @exportstream  # they are marked with the `exportstream` decorator
+    @asynccontextmanager  # and the `asynccontextmanager` decorator for managing the lifecycle of the stream
+    async def random_stream(self):
+        async with await FileReadStream.from_path("/dev/urandom") as stream:
+            yield stream

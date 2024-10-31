@@ -20,3 +20,7 @@ def test_example_custom():
         custom.configure(1.0, "two", [3.0, 4.0])
         assert custom.slow_task(0.2) == "slept for 0.2 seconds"
         assert list(islice(custom.slow_generator(), 3)) == [0.0, 1.0, 2.0]
+        custom.combined_action()
+
+        with custom.random_stream() as stream:
+            assert len(stream.receive()) == 65536

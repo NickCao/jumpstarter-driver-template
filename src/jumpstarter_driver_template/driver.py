@@ -5,7 +5,7 @@ from anyio import sleep
 from jumpstarter.driver import Driver, export
 from jumpstarter.drivers.power.driver import PowerInterface
 from jumpstarter.drivers.power.common import PowerReading
-from collections.abc import Generator
+from collections.abc import Generator, AsyncGenerator
 import logging
 
 # drivers SHOULD use standrd python logging
@@ -56,8 +56,15 @@ class ExampleCustom(Driver):
         # e.g. configure the device with parameters
         logger.info(f"configure called with parameters: {param1}, {param2}, {param3}")
 
-    # driver methods can be async
+    # driver methods can be async functions
     @export
     async def slow_task(self, seconds: float) -> str:
         await sleep(seconds)
         return f"slept for {seconds} seconds"
+
+    # or async generators
+    @export
+    async def slow_generator(self) -> AsyncGenerator[float]:
+        for i in count():
+            await sleep(0.1)
+            yield i

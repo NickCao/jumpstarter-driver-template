@@ -1,4 +1,5 @@
 from jumpstarter.client import DriverClient
+from collections.abc import AsyncGenerator
 
 
 class ExampleCustomClient(DriverClient):
@@ -7,3 +8,6 @@ class ExampleCustomClient(DriverClient):
 
     def slow_task(self, seconds: float) -> str:
         return self.call("slow_task", seconds)
+
+    def slow_generator(self) -> AsyncGenerator[float]:
+        yield from self.streamingcall("slow_generator")

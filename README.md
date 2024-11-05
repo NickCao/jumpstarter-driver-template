@@ -1,5 +1,5 @@
 # Jumpstarter Driver Template
-Template repo for custom jumpstarter drivers
+Template repo for out-of-tree jumpstarter drivers
 
 ## Getting Started
 > [!TIP]
@@ -25,12 +25,21 @@ Other than that, the implementation of custom drivers are very similar to standa
 #### Custom Driver Clients
 Clients for standard drivers are provided by jumpstarter, but for custom drivers, you need to write your own. A client for the `ExampleCustom` driver can be found as the `ExampleCustomClient` class in `src/jumpstarter_driver_template/client.py`. Having the driver and the client in different modules allows them to be distributed separately, avoiding installint extraneous dependencies on the client side. Client classes are based on the `DriverClient` base class, which would be automatically populated with data and methods for accessing the driver. Namely `call` and `streamingcall` are provided for calling regular functions and generator functions.
 
+## Using Out-of-tree Driver
+Out-of-tree drivers can be shipped as regular python packages to be installed into existing jumpstarter installations. Beware for custom drivers, it has to be installed on both the exporter and the client side, for standard drivers, installing them on the exporters is enough.
+
+To build the package, run
+```shell
+uv build
+```
+And the wheel would be generated in `dist`
+
 ## Content
 ### `pyproject.toml`
 Python package metadata
 
 ### `Dockerfile`
-Dockerfile for integrating custom driver with upstream jumpstarter image
+Dockerfile for integrating out-of-tree driver with upstream jumpstarter image
 
 ### `src/jumpstarter_driver_template/driver.py`
 Example driver implementation of the power interface definition and a custom driver using advanced features

@@ -3,7 +3,7 @@ Template repo for custom jumpstarter drivers
 
 ## Getting Started
 > [!TIP]
-> <description> represents placeholders in this documents, e.g. "foo-<put bar here>-baz" means "foo-bar-baz", without the less/bigger than signs.
+> `<description>` represents placeholders in this documents, e.g. `foo-<put bar here>-baz` means `foo-bar-baz`, without the less/bigger than signs.
 
 To get started, first create a new repository using this template. It's recommended to name the repo as `jumpstarter-driver-<driver name (e.g. raspberrypi)>`.
 

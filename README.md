@@ -12,6 +12,13 @@ Then replace references to `jumpstarter-driver-template` with your own driver's 
 find * -type f -exec sed -i "s|\(jumpstarter[_-]driver[_-]\)template|\1<driver name>|" {} \;
 ```
 
+Now you can decide if you want to implement an existing driver interface or create a fully custom driver. Existing driver interfaces cover common usecases such as power control, serial console and storage mux. They are easier to implement since the client part of the driver is provided, but less flexible.
+
+### Existing Driver Interface
+An example implementation of `PowerInterface` can be found as the `ExamplePower` class in `src/jumpstarter_driver_template/driver.py`. In general, you are required to base your driver class on both the interface you want to implement and the `Driver` base class. After which you can implement the `abstractmethod` defined on the interface, in the case of `PowerInterface`, there are three: `on`, `off`, and `read`.
+
+### Custom Driver
+
 ## Content
 ### `pyproject.toml`
 Python package metadata

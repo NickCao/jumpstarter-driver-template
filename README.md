@@ -15,9 +15,10 @@ find * -type f -exec sed -i "s|\(jumpstarter[_-]driver[_-]\)template|\1<driver n
 Now you can decide if you want to implement an existing driver interface or create a fully custom driver. Existing driver interfaces cover common usecases such as power control, serial console and storage mux. They are easier to implement since the client part of the driver is provided, but less flexible.
 
 ### Existing Driver Interface
-An example implementation of `PowerInterface` can be found as the `ExamplePower` class in `src/jumpstarter_driver_template/driver.py`. In general, you are required to base your driver class on both the interface you want to implement and the `Driver` base class. After which you can implement the `abstractmethod` defined on the interface, in the case of `PowerInterface`, there are three: `on`, `off`, and `read`.
+An example implementation of `PowerInterface` can be found as the `ExamplePower` class in `src/jumpstarter_driver_template/driver.py`. In general, you are required to base your driver class on both the interface you want to implement and the `Driver` base class. After which you can implement the `abstractmethod` defined on the interface, in the case of `PowerInterface`, there are three: `on`, `off`, and `read`. Make sure to conform to the predefined function signature, and mark the methods with the `exporter` decorator, other than that the internal implementation can be however you prefer. An easy way to start is to use the `subprocess` module to call existing tools or scripts, and gradually rewrite them in python.
 
 ### Custom Driver
+An example custom driver can be found as `ExampleCustom` class in `src/jumpstarter_driver_template/driver.py`. Unlike dirvers implementing existing interfaces, custom drivers only have to inherit from the `Driver` base class. One of the features of custom drivers is they can take arbitrary (yaml serializable) configuration parameters, thus it's recommended to define custom drivers as `kw_only` dataclasses, the fields would be automatically initialized from the exporter config. Another peculiarity of custom drivers is you have to provide a `classmethod` named `client`, returning the full import path of the corresponding client class (which would be further explained later in this document).
 
 ## Content
 ### `pyproject.toml`

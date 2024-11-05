@@ -34,6 +34,8 @@ uv build
 ```
 And the wheel would be generated in `dist`
 
+For container based installations, you can integrate the wheel into prebuilt jumpstarter container images, an example `Dockerfile` is provided in this repo.
+
 ## Content
 ### `pyproject.toml`
 Python package metadata
